@@ -12,8 +12,9 @@ include <box_top.scad>;
 include <pcb.scad>;
 
 // Public variables
-SOB_Convexity = 4;
-// Standard values
+SOB_Convexity = 4;  // This helps with fast rendering and odd clipping
+
+// Standard values : You can override these when you use the library
 SOB_pcb_width = 100;
 SOB_pcb_height = 80;
 SOB_pcb_thickness = 1.6; // Standard PCB FR4 thickness
