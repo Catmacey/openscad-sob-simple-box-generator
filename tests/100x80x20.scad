@@ -8,7 +8,7 @@ include <../sob.scad>;
 // Overwrite some defaults
 SOB_pcb_width = 100;
 SOB_pcb_height = 80;
-SOB_lip_thickness = 4;
+SOB_lip_thickness = 2;
 
 box_height_top = 10;
 box_height_bottom = 10;

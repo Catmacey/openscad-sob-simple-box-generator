@@ -5,7 +5,6 @@
 // The overall height of the part with the inner lip does not include the lip
 // By default the the middle part has the outer lip.
 
-use <helpers.scad>;
 use <cornerpads.scad>;
 include <box_middle.scad>;
 include <box_top.scad>;
@@ -45,6 +44,20 @@ _SOB_box_lip_r = box_radius_lip();
 
 
 // Common modules
+
+// 2d Rectangle with rounded corners
+module rounded_rectangle(width=100, height=80, corner_r=4){
+	minkowski(){
+		square([width-(corner_r*2),height-(corner_r*2)], true);
+		circle(r=corner_r);
+	}
+};
+
+// Helper module: centered cube on (X,Y) but not on Z, like cylinder
+module centered_cube(size){
+  translate([-size[0]/2, -size[1]/2, 0])
+    cube(size);
+}
 
 // Creates a simple wall
 module sob_wall(height = 10){
