@@ -2,7 +2,8 @@
 
 This is an OpenSCAD library for the creation of simple multipart project cases that can be 3d printed.  
 
-![Sample of three cases showing different options](images/Sample_boxes.png?w=900)
+![Sample of three cases showing different options](images/Sample_boxes.png?w=900 "/tests/sob_tests.scad")
+>This image shows the case variants and is created from /tests/sob_tests.scad
 
 The library is created in [OpenSCAD](http://www.openscad.org/) and is intended for 3d printing using a nothing-special FDM printer with a 0.4mm nozzle.
 
