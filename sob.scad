@@ -5,7 +5,6 @@
 // The overall height of the part with the inner lip does not include the lip
 // By default the the middle part has the outer lip.
 
-use <cornerpads.scad>;
 include <box_middle.scad>;
 include <box_top.scad>;
 include <pcb.scad>;
@@ -156,6 +155,63 @@ module face(thickness = SOB_foot_thickness, hollow = false, xmember, withdrills 
 		}
 	}
 }
+
+// Cornerpads
+// Places a cornerpad in all four corners of a rectangle that defines the centers of the drills
+module cornerpads(
+		drill = 2 // radius
+	, thickness = 2 // extrusion
+){
+	// Offsets for centers of the corner drills
+	off_w = (SOB_pcb_width - (SOB_drill_offset * 2)) / 2;
+	off_h = (SOB_pcb_height - (SOB_drill_offset * 2)) / 2;
+	for(coord = [
+		[-off_w,-off_h, 90],
+		[-off_w,off_h, 0],
+		[off_w,off_h, 90],
+		[off_w,-off_h, 0]
+	]){
+		cornerpad(
+			, drill = drill
+			, thickness = thickness
+			, rotation = coord[2]
+			, x = coord[0]
+			, y = coord[1]
+		);
+	}
+	// Inner module
+	// Lens-ish shaped corner pad with hole
+	module cornerpad (
+		  size = 5 // x,y size of the pad
+		, drill = 2 // radius of the drill
+		, thickness = 2 // extrusion
+		, rotation = 0
+		, x = 0 // optional position
+		, y = 0 // optional position
+	){
+		translate([x,y,0]){
+			rotate([0,0,rotation]){
+				linear_extrude(thickness, convexity = 10){
+					difference(){
+						hull(){
+							square([size,size], false);
+							translate([-size,-size,0]){
+							 	square([size,size], false);
+							}
+							circle(size);
+						}
+						if(drill){
+							circle(drill);
+						}
+					}
+				}
+			}
+		}
+	};
+}
+
+
+
 
 
 // Functions

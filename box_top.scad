@@ -1,28 +1,14 @@
 // Top part of SOB box
 module sob_box_top(
 		overall_height = 10
-	, lip_type = "inner"
-	, cornerpad_thickness
+	, lip_type = "inner"   // [inner|outer] which half of the lip is this?
+	, cornerpad_thickness  // [float] height of the pads that support the pcb
 ){
-	// Box dimensions
-	box_inner_width = box_dimension_inner(SOB_pcb_width);
-	box_outer_width = box_dimension_outer(SOB_pcb_width);
-	box_inner_height = box_dimension_inner(SOB_pcb_height);
-	box_outer_height = box_dimension_outer(SOB_pcb_height);
 
-	// TODO: Allow for flipping the lip
-
-	box_lip_width = box_inner_width + SOB_wall_thickness; 
-	box_lip_height = box_inner_height + SOB_wall_thickness;
-
-	// Radiuses
-	box_inner_r = box_radius_inner();
-	box_outer_r = box_radius_outer();
-	box_lip_r = box_radius_lip();
-
+	// This colour is of course completely optional :o)
 	color("CornflowerBlue")
 	union(){
-		// Abstact this into a SOB_face with optional hollows and crossmember
+		// Top face of the case
 		translate([0,0,overall_height - SOB_face_thickness])
 		face(thickness = SOB_face_thickness, hollow = false);
 
@@ -38,23 +24,20 @@ module sob_box_top(
 			sob_wall(overall_height - SOB_face_thickness - SOB_lip_thickness);
 		}
 
-		// MAYB: Write a function to calc this
-		cpt = 
+		// Pads that you can screw into from below
+		// Start from the face down to the lip
+		// Default is that they extend to the same height as the inner face of
+		// the wall (not including the lip) but they can be thicker or thinner if you wish
+		// NOTE: The holes are smaller holes cos we want interference to screw into
+		cp_thickness = 
 			(cornerpad_thickness != undef)
 			?cornerpad_thickness
 			:overall_height - (lip_type == "inner"?0:SOB_lip_thickness) - SOB_face_thickness
 		;
-
-		// Pads that you can screw into from below
-		// Start from the face down to the lip
-		// NOTE: Small holes cos we want interference to screw into
-		translate([0,0,overall_height - SOB_face_thickness - cpt]){
+		translate([0,0,overall_height - SOB_face_thickness - cp_thickness]){
 			cornerpads(
-				  box_width = SOB_pcb_width - (SOB_drill_offset * 2)
-				, box_height = SOB_pcb_height - (SOB_drill_offset * 2)
-				, size = 5
-				, drill = (SOB_drill_radius * 0.9)
-				, thickness = cpt
+				  drill = (SOB_drill_radius * 0.9)
+				, thickness = cp_thickness
 			);
 		}
 

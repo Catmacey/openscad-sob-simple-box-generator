@@ -12,7 +12,6 @@ module sob_pcb(
 	off_h = (height/2) - drill_offset;
 	// The PCB
 	color(colour, 1) render()
-	// translate([0,0,-thickness])
 	linear_extrude(height = thickness, center = false, convexity = SOB_Convexity){
 		difference(){
 			minkowski(){
@@ -25,7 +24,6 @@ module sob_pcb(
 				[off_w,off_h],
 				[off_w,-off_h]
 			]){
-				// echo(coord);
 				translate([coord[0],coord[1],0]){
 					circle(r=drill_r);
 				}				
