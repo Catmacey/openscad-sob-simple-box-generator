@@ -7,7 +7,7 @@ $fn=32;
 include <../sob.scad>;
 
 // Overwrite some defaults
-SOB_pcb_width = 1000;
+SOB_pcb_width = 100;
 SOB_pcb_height = 80;
 SOB_lip_thickness = 2;
 
