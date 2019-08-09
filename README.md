@@ -13,6 +13,26 @@ The height, width and depth of the case are configurable to any dimensions (not 
 
 The top and middle parts of the case interlock using an overlapping lip. The middle part of the case can have an open bottom, a single crosmember or be completely solid.  The entire case is held together by screws from underneath that screw into pads in the top.
 
+### Example of DP5031 case
+
+[DP5031 sample SCAD file](tests/DP5031.scad)
+
+![DP5031 Cura preview](images/DP5031_cura_preview.png)
+>CURA preview
+
+![DP5031 On the printer](images/DP5031_printed.jpg)
+>Printed in draft 0.4mm nozzle, 0.2mm layers
+
+![DP5031 After a bit of tidying up](images/DP5031_finished.jpg)
+>After a bit of tidying up with a file and cutter to remove the first layer "splodge"
+
+![DP5031 Closed case](images/DP5031_closed.jpg)
+>Completed case closed.  A small case like this one locks together very tighly.
+
+
+
+
+
 Copyright (C) 2019 Matt Casey : catmacey.com
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 	
